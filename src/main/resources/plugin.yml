@@ -1,0 +1,9 @@
+name: FunJump
+version: ${project.version}
+main: com.rainchat.funjump.FunJump
+api-version: 1.17
+authors: [ rain_chat ]
+commands:
+  funjump:
+    usage: /<command>
+    aliases: [fjump]
