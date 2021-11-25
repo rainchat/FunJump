@@ -7,7 +7,10 @@ import com.rainchat.funjump.arenas.Region;
 import com.rainchat.funjump.commands.SubCommand;
 import com.rainchat.funjump.utils.SelectManager;
 import com.rainchat.funjump.utils.data.SelectPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 
 public class ArenaCommand extends SubCommand {
@@ -50,7 +53,7 @@ public class ArenaCommand extends SubCommand {
                 }
                 FunJump.getInstance().getArenaManager().saveArenaToFile(arena);
             } else if (args[1].equalsIgnoreCase("addplatform")) {
-                if (!player.hasPermission("fjump.arenas.setfailregion")) {
+                if (!player.hasPermission("fjump.arenas.setplatform")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoPermissionMessage")));
                     return;
                 }
@@ -67,6 +70,24 @@ public class ArenaCommand extends SubCommand {
 
                     player.sendMessage(ChatColor.GREEN + "Set platform region!");
 
+                }
+                FunJump.getInstance().getArenaManager().saveArenaToFile(arena);
+            } else if (args[1].equalsIgnoreCase("platforms")) {
+                if (!player.hasPermission("fjump.arenas.platforms")) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoPermissionMessage")));
+                    return;
+                }
+                String arenaName = args[2];
+                Arena arena = FunJump.getInstance().getArenaManager().getArena(arenaName);
+                if (arena == null) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoArenaByThatNameMessage")).replace("<arena>", arenaName));
+                    return;
+                }
+
+                for (Region jumpBlocks: arena.getPlatforms()) {
+                    for (BlockState blockState: jumpBlocks.getBlocks()) {
+                        player.sendBlockChange(blockState.getLocation(), Bukkit.createBlockData(Material.GREEN_STAINED_GLASS));
+                    }
                 }
                 FunJump.getInstance().getArenaManager().saveArenaToFile(arena);
             } else {

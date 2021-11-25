@@ -1,8 +1,9 @@
 Settings:
   defaultSpeed: 1.0
 Messages:
-  WinMessage: '&aYou won the jump!'
-  LoseMessage: '&cYou lost the jump!'
+  WinMessage: '&7You &awon &7the jump! You score: &e#arg'
+  LoseMessage: '&7You &clost &7the jump! You score: &e#arg'
+  SpeedMessage: '&7Platform speed increased: &a#arg&7!'
   PrepareToJump: '&bPREPARE TO START!'
   PrepareToStart: "&7The game will begin through"
   NotAPlayerMessage: '&cYou must be a Player to do that!'
@@ -20,5 +21,4 @@ Messages:
   AlreadyInArenaMessage: '&cYou are already in a arena! You cannot join another one yet. Finish your current arena first!'
   NotInArenaMessage: '&cYou are not in a jump arena, so you cannot leave one!'
   LeftArenaMessage: '&aYou left the arena.'
-  CannotLeaveArenaMessage: '&cThe arena has already started! You cannot leave now!'
 Arenas:

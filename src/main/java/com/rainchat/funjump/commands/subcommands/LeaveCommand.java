@@ -19,7 +19,8 @@ public class LeaveCommand  extends SubCommand {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NotInArenaMessage")));
             }else {
                 if(check.getActive()) {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.CannotLeaveArenaMessage")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.LeftArenaMessage")));
+                    check.lose(player);
                     return;
                 }
                 check.removePlayer(player);

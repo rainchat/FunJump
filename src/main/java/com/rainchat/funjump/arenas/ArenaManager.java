@@ -71,7 +71,7 @@ public class ArenaManager {
 				int platMaxX = Integer.parseInt(platSplice[4]);
 				int platMaxY = Integer.parseInt(platSplice[5]);
 				int platMaxZ = Integer.parseInt(platSplice[6]);
-				JumpBlocks jumpBlocks = new JumpBlocks(
+				Region jumpBlocks = new Region(
 						new Location(platWorld,platMinX,platMinY,platMinZ),
 						new Location(platWorld,platMaxX,platMaxY,platMaxZ));
 				arena.addPlatform(jumpBlocks);
@@ -93,7 +93,7 @@ public class ArenaManager {
 
 		c.set(path + ".failRegion", arena.getFailRegion().toSave());
 		List<String> platforms = new ArrayList<>();
-		for (JumpBlocks jumpBlocks: arena.getPlatforms()) {
+		for (Region jumpBlocks: arena.getPlatforms()) {
 			platforms.add(jumpBlocks.toSave());
 		}
 		c.set(path + ".platforms", platforms);

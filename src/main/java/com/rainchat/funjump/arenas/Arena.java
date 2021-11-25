@@ -31,7 +31,7 @@ public class Arena {
 	private boolean active = false;
 
 	private List<Player> players;
-	private List<JumpBlocks> jumpBlocks;
+	private List<Region> jumpBlocks;
 
 	private Region failRegion;
 	private JumpPlatformTask task;
@@ -70,13 +70,15 @@ public class Arena {
 
 	public void end(Player status) {
 		if (players.size() == 0) {
-			status.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.WinMessage")));
+			status.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.WinMessage")
+					.replaceAll("#arg", getScore()+"")));
 			active = false;
 
 			task.cancel();
 			return;
 		}
-		status.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.LoseMessage")));
+		status.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.LoseMessage")
+				.replaceAll("#arg", getScore()+"")));
 	}
 
 	public void lose(Player loser) {
@@ -96,6 +98,7 @@ public class Arena {
 		if (players.size() != 1) {
 			return;
 		}
+		setScore(0);
 
 		for(Player p : players) {
 
@@ -110,7 +113,7 @@ public class Arena {
 
 		Arena arena = this;
 		new BukkitRunnable() {
-			int timer = 15;
+			int timer = 10;
 
 			@Override
 			public void run() {
@@ -125,7 +128,7 @@ public class Arena {
 				if (timer <= 0) {
 					active = true;
 					task = new JumpPlatformTask(arena);
-					task.runTaskTimer(FunJump.getInstance(), 40,15);
+					task.runTaskTimer(FunJump.getInstance(), 0,5);
 					cancel();
 				}
 
@@ -153,8 +156,14 @@ public class Arena {
 				}
 			}catch(NullPointerException e) {
 				// null is not the player
-				continue;
 			}
+		}
+		return false;
+	}
+
+	public boolean sendToAllPlayers(String message) {
+		for(Player p : players) {
+			p.sendMessage(message);
 		}
 		return false;
 	}
@@ -171,7 +180,7 @@ public class Arena {
 		return true;
 	}
 
-	public void addPlatform(JumpBlocks region) {
+	public void addPlatform(Region region) {
 		jumpBlocks.add(region);
 	}
 	
@@ -230,7 +239,7 @@ public class Arena {
 		return failRegion;
 	}
 
-	public List<JumpBlocks> getPlatforms() {
+	public List<Region> getPlatforms() {
 		return jumpBlocks;
 	}
 
