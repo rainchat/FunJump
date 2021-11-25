@@ -25,3 +25,4 @@ After selecting the platform, we claim it:
 /funjump arenas addplatform <arena-name>
 
 ### 4. now we can start game /funjump join 
+![FunBlocks](https://user-images.githubusercontent.com/74442571/143376484-a9e9854f-f8fd-44b7-9549-85087508398e.gif)
