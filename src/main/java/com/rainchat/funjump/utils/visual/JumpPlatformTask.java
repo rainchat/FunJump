@@ -4,7 +4,6 @@ import com.rainchat.funjump.FunJump;
 import com.rainchat.funjump.arenas.Arena;
 import com.rainchat.funjump.arenas.JumpBlocks;
 import com.rainchat.funjump.arenas.Region;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TNTPrimed;
@@ -62,10 +61,10 @@ public class JumpPlatformTask extends BukkitRunnable {
 
 
                 tntTrow(activePlatforms.get(index));
-                amount++;
+
                 arena.setScore(arena.getScore()+getRandomNumber(6,12));
             }
-
+            amount++;
 
         }
     }

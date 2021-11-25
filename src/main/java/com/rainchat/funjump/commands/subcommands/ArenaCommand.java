@@ -25,6 +25,7 @@ public class ArenaCommand extends SubCommand {
     public void onCommand(Player player, String[] args) {
         if (args.length == 3) {
             if (args[1].equalsIgnoreCase("create")) {
+
                 if (!player.hasPermission("fjump.arenas.create")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoPermissionMessage")));
                     return;
@@ -33,7 +34,9 @@ public class ArenaCommand extends SubCommand {
                 Arena arena = FunJump.getInstance().getArenaManager().createArena(arenaName);
                 FunJump.getInstance().getArenaManager().saveArenaToList(arena);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.CreateArenaMessage")));
+
             } else if (args[1].equalsIgnoreCase("setfail")) {
+
                 if (!player.hasPermission("fjump.arenas.setfailregion")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoPermissionMessage")));
                     return;
@@ -52,7 +55,9 @@ public class ArenaCommand extends SubCommand {
                     player.sendMessage(ChatColor.GREEN + "Set fail region!");
                 }
                 FunJump.getInstance().getArenaManager().saveArenaToFile(arena);
+
             } else if (args[1].equalsIgnoreCase("addplatform")) {
+
                 if (!player.hasPermission("fjump.arenas.setplatform")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoPermissionMessage")));
                     return;
@@ -72,7 +77,9 @@ public class ArenaCommand extends SubCommand {
 
                 }
                 FunJump.getInstance().getArenaManager().saveArenaToFile(arena);
+
             } else if (args[1].equalsIgnoreCase("platforms")) {
+
                 if (!player.hasPermission("fjump.arenas.platforms")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoPermissionMessage")));
                     return;
@@ -90,9 +97,26 @@ public class ArenaCommand extends SubCommand {
                     }
                 }
                 FunJump.getInstance().getArenaManager().saveArenaToFile(arena);
+
+            } else if (args[1].equalsIgnoreCase("remove")) {
+
+                if (!player.hasPermission("fjump.arenas.remove")) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoPermissionMessage")));
+                    return;
+                }
+                String arenaName = args[2];
+                Arena arena = FunJump.getInstance().getArenaManager().getArena(arenaName);
+                if (arena == null) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.NoArenaByThatNameMessage")).replace("<arena>", arenaName));
+                    return;
+                }
+
+                FunJump.getInstance().getArenaManager().removeArena(arena);
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.RemoveArena")).replace("#arg", arenaName));
             } else {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.IncorrectArgsMessage")));
             }
+
         }
     }
 

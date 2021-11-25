@@ -1,6 +1,5 @@
 package com.rainchat.funjump.commands.subcommands;
 
-import com.rainchat.funjump.arenas.Arena;
 import com.rainchat.funjump.commands.SubCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

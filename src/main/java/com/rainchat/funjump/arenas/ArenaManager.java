@@ -19,11 +19,7 @@ public class ArenaManager {
 	private int nextID = 0;
 	
 	private List<Arena> arenaList = new ArrayList();
-	
-	/**
-	 * Constructs the ArenaManager with access to the Main class
-	 * @param pl
-	 */
+
 	public ArenaManager(FunJump pl) {
 		plugin = pl;
 		try {
@@ -34,11 +30,7 @@ public class ArenaManager {
 			plugin.getLogger().info(ChatColor.GREEN + "If this is the first time you've loaded this plugin, the above error is normal. Don't worry about it.");
 		}
 	}
-	
-	/**
-	 * Returns a list of all arenas
-	 * @return
-	 */
+
 	public List<Arena> getArenaList(){
 		return arenaList;
 	}
@@ -81,12 +73,7 @@ public class ArenaManager {
 			saveArenaToList(arena);
 		}
 	}
-	
-	/**
-	 * Saves an arena to config.yml
-	 * @param arena
-	 *   The arena to save
-	 */
+
 	public void saveArenaToFile(Arena arena) {
 		FileConfiguration c = plugin.getConfig();
 		String path = "Arenas." + arena.getName();
@@ -102,47 +89,30 @@ public class ArenaManager {
 		plugin.reloadConfig();
 	}
 	
-	/**
-	 * Adds an Arena to arenaList
-	 * @param arena
-	 *   The arena to add
-	 */
+
 	public void saveArenaToList(Arena arena) {
 		arenaList.add(arena);
 	}
-	
-	/**
-	 * Creates an arena with the given name
-	 * @param name
-	 *   The arena's name
-	 * @return
-	 */
+
 	public Arena createArena(String name) {
 		Arena arena = createArena(nextID, name);
 		nextID++;
 		return arena;
 	}
-	
-	/**
-	 * Creates an arena with the given ID and name
-	 * @param id
-	 *   The arena's ID
-	 * @param name
-	 *   The arena's name
-	 * @return
-	 */
+
+	public void removeArena(Arena arena) {
+		FileConfiguration c = plugin.getConfig();
+		c.set("Arenas." + arena.getName(), null);
+
+		plugin.saveConfig();
+		plugin.reloadConfig();
+	}
+
 	private Arena createArena(int id, String name) {
 		Arena arena = new Arena(id, name, plugin);
 		return arena;
 	}
-	
-	/**
-	 * Finds an Arena by the given name
-	 * @param name
-	 *   The arena's name
-	 * @return
-	 *   The arena if found, or null if not
-	 */
+
 	public Arena getArena(String name) {
 		for(Arena arena : arenaList) {
 			if (arena.getName().equalsIgnoreCase(name)) {
@@ -151,14 +121,7 @@ public class ArenaManager {
 		}
 		return null;
 	}
-	
-	/**
-	 * Finds an Arena by one of its players.
-	 * @param player
-	 *   The player
-	 * @return
-	 *   The arena if found, or null if not
-	 */
+
 	public Arena getArena(Player player) {
 		for(Arena arena : arenaList) {
 			if(arena.containsPlayer(player)) {
