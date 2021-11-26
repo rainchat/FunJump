@@ -1,4 +1,4 @@
-package com.rainchat.funjump.commands;
+package com.rainchat.funjump.utils.general;
 
 import org.bukkit.entity.Player;
 

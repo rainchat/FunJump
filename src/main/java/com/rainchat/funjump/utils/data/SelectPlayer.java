@@ -8,6 +8,7 @@ public class SelectPlayer {
     private final Player player;
     private Location pos1;
     private Location pos2;
+    private String arenaName;
 
     public SelectPlayer(Player player) {
         this.player = player;
@@ -22,9 +23,16 @@ public class SelectPlayer {
         return pos1;
     }
 
-
     public Location getPos2() {
         return pos2;
+    }
+
+    public String getArenaName() {
+        return arenaName;
+    }
+
+    public void setArenaName(String arenaName) {
+        this.arenaName = arenaName;
     }
 
     public void setPos1(Location pos1) {

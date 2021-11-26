@@ -1,6 +1,6 @@
 package com.rainchat.funjump.events;
 
-import com.rainchat.funjump.utils.SelectManager;
+import com.rainchat.funjump.managers.SelectManager;
 import com.rainchat.funjump.utils.data.SelectPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

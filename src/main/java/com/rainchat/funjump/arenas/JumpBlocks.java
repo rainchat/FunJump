@@ -49,7 +49,7 @@ public class JumpBlocks extends Region {
             FallingBlock fall = blockState.getLocation().getWorld().spawnFallingBlock(blockState.getLocation().add(0.5,0.5,0.5),blockState.getBlockData());
             fall.setDropItem(false);
             double x = (blockState.getX() - getCenter().getX())*0.09;
-            double y = 0.35;
+            double y = 0.25;
             double z = (blockState.getZ() - getCenter().getZ())*0.09;
             fall.setVelocity(new Vector(x, y, z));
             blockState.getBlock().setType(Material.AIR);

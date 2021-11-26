@@ -5,6 +5,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 
+
+/**
+ * Disable tnt explosions
+ * and Disable tnt push tnt
+ */
+
 public class ExplodeEvent implements Listener {
 
     @EventHandler

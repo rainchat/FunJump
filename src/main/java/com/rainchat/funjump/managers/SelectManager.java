@@ -1,4 +1,4 @@
-package com.rainchat.funjump.utils;
+package com.rainchat.funjump.managers;
 
 import com.rainchat.funjump.utils.data.SelectPlayer;
 import org.bukkit.entity.Player;

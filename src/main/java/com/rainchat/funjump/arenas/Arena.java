@@ -1,7 +1,7 @@
 package com.rainchat.funjump.arenas;
 
 import com.rainchat.funjump.FunJump;
-import com.rainchat.funjump.utils.visual.JumpPlatformTask;
+import com.rainchat.funjump.utils.general.JumpPlatformTask;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,10 +20,10 @@ public class Arena {
 	private int score = 0;
 
 	private double speed = 1;
+	private double speedInc = 0.3;
+
 	private int minPlayers;
 	private int maxPlayers;
-
-	private boolean active = false;
 
 	private List<Player> players;
 	private List<Region> jumpBlocks;
@@ -31,6 +31,7 @@ public class Arena {
 	private Region failRegion;
 	private JumpPlatformTask task;
 
+	private boolean active = false;
 
 	public Arena(int id, String name, FunJump pl) {
 		this.id = id;
@@ -60,14 +61,15 @@ public class Arena {
 	public void end(Player status) {
 		if (players.size() == 0) {
 			status.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.WinMessage")
-					.replaceAll("#arg", getScore()+"")));
+					.replace("{0}", getScore()+"")));
 			active = false;
 
+			task.regenAll();
 			task.cancel();
 			return;
 		}
 		status.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.LoseMessage")
-				.replaceAll("#arg", getScore()+"")));
+				.replace("{0}", getScore()+"")));
 	}
 
 	public void lose(Player loser) {

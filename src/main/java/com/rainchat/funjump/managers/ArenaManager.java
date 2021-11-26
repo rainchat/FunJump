@@ -1,6 +1,8 @@
-package com.rainchat.funjump.arenas;
+package com.rainchat.funjump.managers;
 
 import com.rainchat.funjump.FunJump;
+import com.rainchat.funjump.arenas.Arena;
+import com.rainchat.funjump.arenas.Region;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

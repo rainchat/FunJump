@@ -1,4 +1,4 @@
-package com.rainchat.funjump.utils.visual;
+package com.rainchat.funjump.utils.general;
 
 import com.rainchat.funjump.FunJump;
 import com.rainchat.funjump.arenas.Arena;
@@ -42,8 +42,7 @@ public class JumpPlatformTask extends BukkitRunnable {
 
             if (amount%20 == 0) {
                 speed = speed + 0.3;
-                arena.sendToAllPlayers(ChatColor.translateAlternateColorCodes('&', FunJump.getInstance().getConfig().getString("Messages.SpeedMessage")
-                        .replaceAll("#arg", speed+"")));
+                arena.sendToAllPlayers(Message.SPEED.toString().replace("{0}", speed+""));
             }
 
             for (int i = 0; i < tntCount; i++) {
@@ -79,13 +78,29 @@ public class JumpPlatformTask extends BukkitRunnable {
 
         FunJump.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(
                 FunJump.getInstance(),
-                platform::clearArea,
+               () -> {
+                    if (arena.getActive()) {
+                        platform.clearArea();
+                    }
+               },
                 50);
 
         FunJump.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(
                 FunJump.getInstance(),
-                platform::regenArea,
+                () -> {
+                    if (arena.getActive()) {
+                        platform.regenArea();
+                    }
+                },
                 20L*9);
+    }
+
+    public void regenAll() {
+        for (JumpBlocks jumpBlocks : allPlatforms) {
+            if (!jumpBlocks.isActive()) {
+                jumpBlocks.regenArea();
+            }
+        }
     }
 
     public int getRandomNumber(int min, int max) {

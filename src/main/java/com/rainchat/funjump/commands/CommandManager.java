@@ -5,7 +5,8 @@ import com.rainchat.funjump.commands.subcommands.ArenaCommand;
 import com.rainchat.funjump.commands.subcommands.HelpCommand;
 import com.rainchat.funjump.commands.subcommands.JoinCommand;
 import com.rainchat.funjump.commands.subcommands.LeaveCommand;
-import com.rainchat.funjump.utils.SelectManager;
+import com.rainchat.funjump.managers.SelectManager;
+import com.rainchat.funjump.utils.general.SubCommand;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,11 +19,9 @@ public class CommandManager implements CommandExecutor {
 
     private final ArrayList<SubCommand> commands = new ArrayList<>();
     private final FunJump plugin;
-    private final SelectManager selectManager;
 
-    public CommandManager(FunJump plugin, SelectManager selectManager) {
+    public CommandManager(FunJump plugin) {
         this.plugin = plugin;
-        this.selectManager = selectManager;
     }
 
 
@@ -32,7 +31,7 @@ public class CommandManager implements CommandExecutor {
         plugin.getCommand(main).setExecutor(this);
 
         //Sub Commands
-        this.commands.add(new ArenaCommand(selectManager));
+        this.commands.add(new ArenaCommand());
         this.commands.add(new HelpCommand());
         this.commands.add(new LeaveCommand());
         this.commands.add(new JoinCommand());
